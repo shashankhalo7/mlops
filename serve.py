@@ -97,8 +97,8 @@ def ping():
 @app.route('/invocations', methods=['POST'])
 def predict():
     request_body = flask.request.data
-   print(request_body,type(request_body)) 
-   input_object=input_fn(request_body, content_type=JSON_CONTENT_TYPE)
+    print(request_body,type(request_body)) 
+    input_object=input_fn(request_body, content_type=JSON_CONTENT_TYPE)
     prediction=predict_fn(input_object, learner)
    
     # format into a csv
