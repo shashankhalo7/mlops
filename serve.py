@@ -102,3 +102,5 @@ def predict():
     
     # return
     return Response(response=output, status=200, mimetype='application.json')
+
+app.run()

@@ -70,8 +70,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
         tqdm \
 	&& \
    
-   pip install http://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-linux_x86_64.whl \
-   && \
+   pip install torch==1.5.0+cpu torchvision==0.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html   && \
 
    pip install fastai
 
