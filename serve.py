@@ -92,18 +92,13 @@ def ping():
 
 @app.route('/invocations', methods=['POST'])
 def predict():
-    """
-    Do an inference on a single batch of data.
-    """
-   if flask.request.content_type == 'application/json':
+    if flask.request.content_type == 'application/json':
         request_body = flask.request.data.decode('utf-8')
-   #else:
-   #     return flask.Response(response='This predictor only supports CSV data', status=415, mimetype='text/plain')
-   input_object=input_fn(request_body, content_type=JSON_CONTENT_TYPE)
-   prediction=predict_fn(input_object, learner)
+    input_object=input_fn(request_body, content_type=JSON_CONTENT_TYPE)
+    prediction=predict_fn(input_object, learner)
    
     # format into a csv
     output=output_fn(prediction)
     
     # return
-    return Response(response=output, status=200, mimetype='text/csv')
+    return Response(response=output, status=200, mimetype='application.json')
