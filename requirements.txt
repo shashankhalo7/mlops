@@ -1,0 +1,8 @@
+Flask
+gunicorn
+numpy
+wget
+flask_cors
+sagemaker
+pandas
+
