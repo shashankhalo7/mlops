@@ -96,8 +96,7 @@ def ping():
 
 @app.route('/invocations', methods=['POST'])
 def predict():
-    if flask.request.content_type == 'application/json':
-        request_body = flask.request.data.decode('utf-8')
+    request_body = flask.request.data.decode('utf-8')
     input_object=input_fn(request_body, content_type=JSON_CONTENT_TYPE)
     prediction=predict_fn(input_object, learner)
    
