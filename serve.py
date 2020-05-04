@@ -76,6 +76,10 @@ app = Flask(__name__)
 
 learner=model_fn('/opt/ml/model/')
 
+@app.route('/')
+def hello_world():
+   return 'Hello World’
+
 @app.route('/ping', methods=['GET'])
 def ping():
     """

@@ -8,4 +8,4 @@ wget -O /opt/ml/model/model.pkl $MODEL_URL
 echo $VAR1
 ls /opt/program/
 ls /opt/ml/model/
-bash
+python /opt/program/serve.py
