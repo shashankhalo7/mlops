@@ -55,7 +55,7 @@ def predict_fn(input_object, learner):
     learner.data.add_test(test)
     preds=learner.get_preds(ds_type=DatasetType.Test)
     classes=[learner.data.classes[x] for x in np.argmax(preds[0],1)]
-    output={int((str(learner.data.test_ds.items[i]).strip(ascii_letters+'/'+'.'+'_'))):orientation[i] for i in range(bs)}
+    output={int((str(learner.data.test_ds.items[i]).strip(ascii_letters+'/'+'.'+'_'))):classes[i] for i in range(bs)}
     for i in os.listdir("test/"):
         os.remove(f"test/{i}")
     return dict(urls=urls,predictions=[output[i] for i in range(bs)],Status='Success')
@@ -106,4 +106,3 @@ def predict():
     
     # return
     return Response(response=output, status=200, mimetype='application.json')
-
