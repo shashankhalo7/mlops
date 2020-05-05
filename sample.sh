@@ -11,5 +11,6 @@ echo $VAR1
 ls /opt/program/
 ls /opt/ml/model/
 export FLASK_APP=/opt/program/serve.py
+export FLASK_RUN_PORT=8080
 flask run 
 

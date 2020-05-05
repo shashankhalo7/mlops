@@ -79,4 +79,4 @@ COPY sample.sh .
 RUN pip install -r requirements.txt
 RUN chmod +x sample.sh
 
-CMD ./sample.sh
+ENTRYPOINT ["./sample.sh"]
