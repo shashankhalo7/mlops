@@ -102,7 +102,7 @@ def predict():
     prediction=predict_fn(input_object, learner)
    
     # format into a csv
-    output=output_fn(prediction)
+    output=output_fn(prediction)[0]
     
     # return
     return Response(response=output, status=200, mimetype='application.json')
