@@ -5,6 +5,7 @@ import wget
 from string import ascii_letters
 import urllib.parse
 import time
+import base64
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -25,7 +26,7 @@ def model_fn(model_dir):
 def input_fn(request_body, content_type=JSON_CONTENT_TYPE):
     torch.no_grad()
     logger.info('Deserializing the input data.')
-    if content_type == JPEG_CONTENT_TYPE: return [open_image(io.BytesIO(request_body))]
+    if content_type == JPEG_CONTENT_TYPE: return [open_image(io.BytesIO(base64.b64decode(x.encode('utf-8')))) for x in json.loads(request_body)['img_data']]
     # process a URL submitted to the endpoint
     #print("Input Started No JPEG")
     if content_type == JSON_CONTENT_TYPE:
@@ -97,8 +98,9 @@ def ping():
 @app.route('/invocations', methods=['POST'])
 def predict():
     request_body = flask.request.data
-    print(request_body,type(request_body)) 
-    input_object=input_fn(request_body, content_type=JSON_CONTENT_TYPE)
+    print(request_body,type(request_body))
+    content_type= json.loads(request_body).get('content_type','application/json') 
+    input_object=input_fn(request_body, content_type=content_type)
     prediction=predict_fn(input_object, learner)
    
     # format into a csv
